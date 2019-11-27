@@ -42,6 +42,18 @@ message GetResponse {
 	bytes value = 2;
 }
 
+message MembershipProof {
+	uint64 index = 1;
+	bytes hash = 2;
+	bytes root = 3;
+	uint64 at = 4;
+	repeated bytes path = 5;
+}
+
+message MembershipRequest {
+	uint64 index = 1;
+}
+
 message HealthResponse {
 	bool status = 1;
 }
@@ -50,5 +62,6 @@ service ImmuService {
 	rpc Set (SetRequest) returns (SetResponse);
 	rpc SetBatch (BatchSetRequest) returns (SetResponse);
 	rpc Get (GetRequest) returns (GetResponse);
+	rpc Membership(MembershipRequest) returns (MembershipProof);
 	rpc Health (google.protobuf.Empty) returns (HealthResponse);
 }
